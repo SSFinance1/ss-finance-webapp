@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SS Finance</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }
+    h1 { color: #1e3a8a; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 10px 20px; background: #1e3a8a; color: white; border: none; cursor: pointer; }
+    button:hover { background: #3b82f6; }
+    .lang-switch { float: right; margin-top: -40px; }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="lang-switch">
+      <label>Language:
+        <select onchange="setLang(this.value)">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+      </label>
+    </div>
+
+    <h1 id="title">Apply for a Loan</h1>
+    <form id="loanForm" onsubmit="submitForm(event)">
+      <label id="nameLabel">Name</label>
+      <input type="text" id="name" required />
+
+      <label id="phoneLabel">Phone</label>
+      <input type="tel" id="phone" required />
+
+      <label id="loanTypeLabel">Loan Type</label>
+      <select id="loanType">
+        <option>Home Loan</option>
+        <option>Car Loan</option>
+        <option>Personal Loan</option>
+        <option>Mortgage</option>
+        <option>Education Loan</option>
+      </select>
+
+      <label id="amountLabel">Loan Amount</label>
+      <input type="number" id="amount" required />
+
+      <label id="incomeLabel">Monthly Income</label>
+      <input type="number" id="income" required />
+
+      <button type="submit" id="submitBtn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const loanType = document.getElementById('loanType').value;
+      const amount = document.getElementById('amount').value;
+      const income = document.getElementById('income').value;
+
+      const message = `New Loan Application:%0AName: ${name}%0APhone: ${phone}%0ALoan Type: ${loanType}%0AAmount: ₹${amount}%0AIncome: ₹${income}`;
+      window.open(`https://wa.me/918269280424?text=${message}`, '_blank');
+      alert("Submitted! Redirecting to WhatsApp.");
+    }
+
+    const translations = {
+      hi: {
+        title: "ऋण के लिए आवेदन करें",
+        nameLabel: "नाम",
+        phoneLabel: "फोन नंबर",
+        loanTypeLabel: "ऋण प्रकार",
+        amountLabel: "ऋण राशि",
+        incomeLabel: "मासिक आय",
+        submitBtn: "जमा करें"
+      },
+      en: {
+        title: "Apply for a Loan",
+        nameLabel: "Name",
+        phoneLabel: "Phone",
+        loanTypeLabel: "Loan Type",
+        amountLabel: "Loan Amount",
+        incomeLabel: "Monthly Income",
+        submitBtn: "Submit"
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('nameLabel').textContent = t.nameLabel;
+      document.getElementById('phoneLabel').textContent = t.phoneLabel;
+      document.getElementById('loanTypeLabel').textContent = t.loanTypeLabel;
+      document.getElementById('amountLabel').textContent = t.amountLabel;
+      document.getElementById('incomeLabel').textContent = t.incomeLabel;
+      document.getElementById('submitBtn').textContent = t.submitBtn;
+    }
+  </script>
+</body>
+</html>
